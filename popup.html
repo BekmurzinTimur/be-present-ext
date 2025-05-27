@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      body {
+        width: 200px;
+        padding: 20px;
+        font-family: Arial, sans-serif;
+        text-align: center;
+      }
+      .toggle-container {
+        margin: 10px 0;
+      }
+      .toggle {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+      }
+      .toggle input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        transition: 0.4s;
+        border-radius: 34px;
+      }
+      .slider:before {
+        position: absolute;
+        content: '';
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        transition: 0.4s;
+        border-radius: 50%;
+      }
+      input:checked + .slider {
+        background-color: #4caf50;
+      }
+      input:checked + .slider:before {
+        transform: translateX(26px);
+      }
+      .status {
+        margin-top: 15px;
+        font-size: 14px;
+        color: #666;
+      }
+      .active {
+        color: #4caf50;
+        font-weight: bold;
+      }
+      .inactive {
+        color: #999;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="toggle-container">
+      <label class="toggle">
+        <input type="checkbox" id="bellToggle" />
+        <span class="slider"></span>
+      </label>
+    </div>
+    <div id="status" class="status inactive">Inactive</div>
+    <p style="font-size: 12px; color: #888; margin-top: 15px">
+      Bell rings every 5 minutes when active
+    </p>
+    <script src="popup.js"></script>
+  </body>
+</html>

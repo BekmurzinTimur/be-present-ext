@@ -1,0 +1,25 @@
+{
+  "manifest_version": 3,
+  "name": "Be present",
+  "version": "1.0",
+  "description": "A gentle bell reminder to stay present and focused every 5 minutes",
+  "permissions": ["storage", "offscreen"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Be present"
+  },
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["bell.mp3"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
