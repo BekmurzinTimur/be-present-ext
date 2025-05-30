@@ -1,81 +1,224 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <style>
-      body {
-        width: 200px;
-        padding: 20px;
-        font-family: Arial, sans-serif;
-        text-align: center;
-      }
-      .toggle-container {
-        margin: 10px 0;
-      }
-      .toggle {
-        position: relative;
-        display: inline-block;
-        width: 60px;
-        height: 34px;
-      }
-      .toggle input {
-        opacity: 0;
-        width: 0;
-        height: 0;
-      }
-      .slider {
-        position: absolute;
-        cursor: pointer;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: #ccc;
-        transition: 0.4s;
-        border-radius: 34px;
-      }
-      .slider:before {
-        position: absolute;
-        content: '';
-        height: 26px;
-        width: 26px;
-        left: 4px;
-        bottom: 4px;
-        background-color: white;
-        transition: 0.4s;
-        border-radius: 50%;
-      }
-      input:checked + .slider {
-        background-color: #4caf50;
-      }
-      input:checked + .slider:before {
-        transform: translateX(26px);
-      }
-      .status {
-        margin-top: 15px;
-        font-size: 14px;
-        color: #666;
-      }
-      .active {
-        color: #4caf50;
-        font-weight: bold;
-      }
-      .inactive {
-        color: #999;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="toggle-container">
-      <label class="toggle">
-        <input type="checkbox" id="bellToggle" />
-        <span class="slider"></span>
-      </label>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body {
+      width: 250px;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    .toggle-container {
+      margin: 10px 0;
+    }
+    .toggle {
+      position: relative;
+      display: inline-block;
+      width: 60px;
+      height: 34px;
+    }
+    .toggle input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      transition: .4s;
+      border-radius: 34px;
+    }
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 26px;
+      width: 26px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+    input:checked + .slider {
+      background-color: #4CAF50;
+    }
+    input:checked + .slider:before {
+      transform: translateX(26px);
+    }
+    .status {
+      margin-top: 15px;
+      font-size: 14px;
+      color: #666;
+    }
+    .active {
+      color: #4CAF50;
+      font-weight: bold;
+    }
+    .inactive {
+      color: #999;
+    }
+    .time-container {
+      margin: 20px 0;
+      padding: 15px;
+      background: #f8f9fa;
+      border-radius: 8px;
+      border: 1px solid #e9ecef;
+    }
+    .time-label {
+      font-size: 14px;
+      color: #333;
+      margin-bottom: 12px;
+      font-weight: 500;
+    }
+    .time-options {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .time-option {
+      flex: 1;
+      min-width: 35px;
+    }
+    .time-option input[type="radio"] {
+      display: none;
+    }
+    .time-option label {
+      display: block;
+      padding: 8px 4px;
+      background: white;
+      border: 2px solid #ddd;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 500;
+      color: #666;
+      transition: all 0.2s;
+      text-align: center;
+    }
+    .time-option label:hover {
+      border-color: #4CAF50;
+      color: #4CAF50;
+    }
+    .time-option input[type="radio"]:checked + label {
+      background: #4CAF50;
+      border-color: #4CAF50;
+      color: white;
+    }
+    .volume-container {
+      margin: 20px 0;
+      padding: 15px;
+      background: #f8f9fa;
+      border-radius: 8px;
+      border: 1px solid #e9ecef;
+    }
+    .volume-label {
+      font-size: 14px;
+      color: #333;
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+    .volume-slider {
+      width: 100%;
+      height: 6px;
+      border-radius: 3px;
+      background: #ddd;
+      outline: none;
+      opacity: 0.8;
+      transition: opacity 0.2s;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+    .volume-slider:hover {
+      opacity: 1;
+    }
+    .volume-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #4CAF50;
+      cursor: pointer;
+      border: 2px solid white;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+    .volume-slider::-moz-range-thumb {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #4CAF50;
+      cursor: pointer;
+      border: 2px solid white;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+    .volume-slider::-webkit-slider-track {
+      width: 100%;
+      height: 6px;
+      cursor: pointer;
+      background: linear-gradient(to right, #4CAF50 0%, #4CAF50 var(--value, 50%), #ddd var(--value, 50%), #ddd 100%);
+      border-radius: 3px;
+    }
+    .volume-value {
+      text-align: center;
+      font-size: 12px;
+      color: #666;
+      margin-top: 8px;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+  <h3>🔔 Mindfulness Bell</h3>
+  <div class="toggle-container">
+    <label class="toggle">
+      <input type="checkbox" id="bellToggle">
+      <span class="slider"></span>
+    </label>
+  </div>
+  <div id="status" class="status inactive">Inactive</div>
+  
+  <div class="time-container">
+    <div class="time-label">Ring every</div>
+    <div class="time-options">
+      <div class="time-option">
+        <input type="radio" id="time1" name="bellTime" value="1">
+        <label for="time1">1m</label>
+      </div>
+      <div class="time-option">
+        <input type="radio" id="time5" name="bellTime" value="5" checked>
+        <label for="time5">5m</label>
+      </div>
+      <div class="time-option">
+        <input type="radio" id="time10" name="bellTime" value="10">
+        <label for="time10">10m</label>
+      </div>
+      <div class="time-option">
+        <input type="radio" id="time20" name="bellTime" value="20">
+        <label for="time20">20m</label>
+      </div>
+      <div class="time-option">
+        <input type="radio" id="time60" name="bellTime" value="60">
+        <label for="time60">1h</label>
+      </div>
     </div>
-    <div id="status" class="status inactive">Inactive</div>
-    <p style="font-size: 12px; color: #888; margin-top: 15px">
-      Bell rings every 5 minutes when active
-    </p>
-    <script src="popup.js"></script>
-  </body>
+  </div>
+  
+  <div class="volume-container">
+    <div class="volume-label">Volume</div>
+    <input type="range" id="volumeSlider" min="0" max="100" value="50" class="volume-slider">
+    <div class="volume-value" id="volumeValue">50%</div>
+  </div>
+  
+  <p style="font-size: 12px; color: #888; margin-top: 15px;">
+    Stay present and focused with gentle reminders
+  </p>
+  <script src="popup.js"></script>
+</body>
 </html>
